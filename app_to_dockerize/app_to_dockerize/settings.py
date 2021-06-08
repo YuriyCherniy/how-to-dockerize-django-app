@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'app_to_dockerized.wsgi.application'
+WSGI_APPLICATION = 'app_to_dockerize.wsgi.application'
 
 
 # Database
