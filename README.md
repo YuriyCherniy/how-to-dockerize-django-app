@@ -26,5 +26,15 @@
 * sudo apt install postgresql-12
 
 ## Установка Docker и Compose займёт немного больше времени
-* Для установки Docker выполнить шаги из официальной документации: [Install using the repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
+* Для установки Docker выполнить шаги из официальной документации: [Install Docker using the repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 * Для установки Compose выполнить шаги из официальной документации: [Install Compose](https://docs.docker.com/compose/install/#install-compose)
+
+## Создание и настройка базы данных
+* запустить консоль psql: ```sudo -u postgres psql```
+* создать базу данных: ```CREATE DATABASE <db_name>;```
+* создать пользователя: ```CREATE USER <username> WITH PASSWORD '<password>';```
+* предоставеть пользователю административный доступ к базе данных: ```GRANT ALL PRIVILEGES ON DATABASE <db_name> TO <username>;```
+### выполнить рекомендации по оптимизации Postgresql из официальной докуметации Django: ###
+* ```ALTER ROLE <username> SET client_encoding TO 'utf8';```
+* ```ALTER ROLE <username> SET default_transaction_isolation TO 'read committed';```
+* ```ALTER ROLE <username> SET timezone TO 'UTC';```
