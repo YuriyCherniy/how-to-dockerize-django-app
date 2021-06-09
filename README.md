@@ -34,7 +34,7 @@
 * создать базу данных: ```CREATE DATABASE <db_name>;```
 * создать пользователя: ```CREATE USER <username> WITH PASSWORD '<password>';```
 * предоставеть пользователю административный доступ к базе данных: ```GRANT ALL PRIVILEGES ON DATABASE <db_name> TO <username>;```
-### выполнить рекомендации по оптимизации Postgresql из официальной докуметации Django: ###
+#### выполнить рекомендации по оптимизации Postgresql из официальной докуметации Django: ####
 * ```ALTER ROLE <username> SET client_encoding TO 'utf8';```
 * ```ALTER ROLE <username> SET default_transaction_isolation TO 'read committed';```
 * ```ALTER ROLE <username> SET timezone TO 'UTC';```
