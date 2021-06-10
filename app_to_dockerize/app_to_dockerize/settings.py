@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'app_to_dockerize.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'new_user_db',
-        'USER': 'new_user_postgres',
+        'NAME': 'test_db',
+        'USER': 'user_postgres',
         'PASSWORD': '0000',
         'HOST': 'localhost',
         'PORT': 5432,

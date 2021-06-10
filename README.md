@@ -34,6 +34,7 @@
 * создать базу данных: ```CREATE DATABASE <db_name>;```
 * создать пользователя: ```CREATE USER <username> WITH PASSWORD '<password>';```
 * предоставить пользователю административный доступ к базе данных: ```GRANT ALL PRIVILEGES ON DATABASE <db_name> TO <username>;```
+> в контексте данного руководства замените ```<db_name>``` на ```test_db```, ```<username>``` на ```user_postgres```, ```<password>``` на ```0000```. Если будете использовать собственные значение не забудьте внести изменения в переменную [DATABASES](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/c3a6c7b889e47b2882f5707ff21f6509bb902ca1/app_to_dockerize/app_to_dockerize/settings.py#L78-L87)
 #### Выполнить рекомендации по оптимизации Postgresql из [официальной докуметации Django](https://docs.djangoproject.com/en/3.2/ref/databases/#postgresql-notes): ####
 * ```ALTER ROLE <username> SET client_encoding TO 'utf8';```
 * ```ALTER ROLE <username> SET default_transaction_isolation TO 'read committed';```
@@ -126,13 +127,14 @@ server {
     }
 
     location /static/ {
-        root /home/new_user/how-to-dockerize-django-app/app_to_dockerize/;
+        root /home/<username>/how-to-dockerize-django-app/app_to_dockerize/;
     }
 
 }
 
 ```
 > ```<your_domain.ru>``` и ```<www.your_domain.ru>``` замените на ваши доменные имена.
+> ```<username>``` замените на имя пользователя операционной системы.
 * проверить конфигурационные файлы Nginx на синтаксические ошибки: ```sudo nginx -t```
 * перезагрузить конфигурационные файлы Nginx: ```sudo nginx -s reload```
 Если всё было сделанно правильно сайт должен открываться на вашем домене по http соединению.
