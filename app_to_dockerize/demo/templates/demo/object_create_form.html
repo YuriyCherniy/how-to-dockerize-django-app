@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Сохранить">
+    </form>
+
+    {% for object in object_list %}
+        <h4>Запись в базе данных № {{ object.pk }}: {{ object }}</h4>
+    {% endfor %}
+{% endblock content %}
