@@ -104,7 +104,7 @@ http {
   include conf.d/app_to_dockerize;
 }
 ```
-* открыть файл: ``````
+* открыть файл: ```sudo nano /etc/nginx/conf.d/app_to_dockerize```
 * поместить следующее содержимое:
 ```
 include /etc/nginx/mime.types;
