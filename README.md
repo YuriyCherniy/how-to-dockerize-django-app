@@ -3,7 +3,7 @@
 
 > Данное руководство не является ультимативным гайдом по деплою Django приложений. Это всего лишь небольшая памятка для автора этих строк, которая может быть полезна ещё кому-то. Какие-то решения могут быть неэффективными, какие-то небезопасными. Но к концу этих строк мы получим настроенный VDS/VPS сервер с работающим сайтом, настоящей базой данных и SSL сертификатом. Критика и помощь в совершенствовании приветствуется. Pull request в помощь.
 
-## После установки системы выполнить следующие команды ##
+## После установки системы на VDS/VPS сервере выполнить следующие команды ##
 * sudo apt update
 * sudo apt upgrade
 > Первая команда обновит список доступных пакетов. Вторая обновит пакеты в системе. 
@@ -33,7 +33,7 @@
 * запустить консоль psql: ```sudo -u postgres psql```
 * создать базу данных: ```CREATE DATABASE <db_name>;```
 * создать пользователя: ```CREATE USER <username> WITH PASSWORD '<password>';```
-* предоставеть пользователю административный доступ к базе данных: ```GRANT ALL PRIVILEGES ON DATABASE <db_name> TO <username>;```
+* предоставить пользователю административный доступ к базе данных: ```GRANT ALL PRIVILEGES ON DATABASE <db_name> TO <username>;```
 #### Выполнить рекомендации по оптимизации Postgresql из [официальной докуметации Django](https://docs.djangoproject.com/en/3.2/ref/databases/#postgresql-notes): ####
 * ```ALTER ROLE <username> SET client_encoding TO 'utf8';```
 * ```ALTER ROLE <username> SET default_transaction_isolation TO 'read committed';```
@@ -41,7 +41,7 @@
 * покинуть консоль psql: ```ctr+Z```
 
 ## Создание и запуск Docker контейнера ##
-Файл Dockerfile содержит инструкции по созданию Docker образа на основе которого будет создаваться и запускаться контейнер с Django приложением. Вот так выглядит наш:
+Файл [Dockerfile](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/Dockerfile) содержит инструкции по созданию Docker образа на основе которого будет создаваться и запускаться контейнер с Django приложением. Вот так выглядит наш:
 ```
 FROM python:3.9.5-slim
 ENV PYTHONUNBUFFERED=1
@@ -52,7 +52,7 @@ COPY . .
 RUN ["chmod", "+x", "docker-entrypoint.sh"]
 ENTRYPOINT [ "./docker-entrypoint.sh" ]
 ```
-Образ будет создан на основе официального образа python:3.9.5-slim, туда будет скопирован файл requirements.txt, затем установятся все зависимости. Далее будут скопированны файлы нашего приложения и выполнены инструкции из файла docker-entrypoint.sh. Вот его содержимое:
+Образ будет создан на основе официального образа python:3.9.5-slim, туда будет скопирован файл [requirements.txt](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/requirements.txt), затем установятся все зависимости. Далее будут скопированны файлы нашего приложения и выполнены инструкции из файла [docker-entrypoint.sh](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/docker-entrypoint.sh). Вот его содержимое:
 ```
 #!/bin/bash
 
@@ -69,7 +69,7 @@ echo "Starting server"
 gunicorn app_to_dockerize.wsgi:application --bind 0.0.0.0:8000 --workers 3
 ```
 Последняя строка запустит сервер приложений gunicorn для обслуживания нашего Django проекта.
-Упаравлять Docker будем с помощью docker-compose. Compose обычно используется для работы с многоконтейнерными проектами, но и в данном случае docker-compose немного облегчает работу, а при развитии проекта может оказаться необходимым. Например, Compose предоставляет очень удобный интерфейс для работы с именованными томами, а они однозначно понадобятся если приложение будет немного сложнее, чем пример из этого руководства. Инструкции для docker-compose описываются в файле docker-compose.yml. Вот содержимое нашего:
+Упаравлять Docker будем с помощью docker-compose. Compose обычно используется для работы с многоконтейнерными проектами, но и в данном случае docker-compose немного облегчает работу, а при развитии проекта может оказаться необходимым. Например, Compose предоставляет очень удобный интерфейс для работы с именованными томами, а они однозначно понадобятся если приложение будет немного сложнее, чем пример из этого руководства. Инструкции для docker-compose описываются в файле [docker-compose.yml](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/docker-compose.yml). Вот содержимое нашего:
 ```
 version: "3.9"
    
@@ -82,8 +82,9 @@ services:
     restart: unless-stopped
 ```
 Compose смотрит в Dockerfile, строит на его основе образ, а также определяет папку на хосте, куда будут собраны статические файлы. **network_mode: "host"** говорит о том, что сеть Docker контейнера будет открыта локальному хосту, без этого Nginx не увидит сеть кконтейнера. **restart: unless-stopped** говорит о том, что при перезагрузке сервера Docker контейнер будет стартовать автоматически, пока не будет остановлен намеренно.
+
 ## Всё готово, можно запускать создание и старт контейнера ##
-* скачать приложение на сервер: ```git clone https://github.com/YuriyCherniy/how-to-dockerize-django-app.git```
+* скачать Django приложение на сервер: ```git clone https://github.com/YuriyCherniy/how-to-dockerize-django-app.git```
 * перейти в папку содержащую docker-compose.yml файл: ```cd how-to-dockerize-django-app/app_to_dockerize/```
 * запустить создание и запуск контейнера: ```sudo docker-compose up -d```
 > ключь ```-d``` говорит о том, что контейнер будет запущен в **detached mode**. Это значит, что после создания образа и запуска контейнера, консоль будет освобождена. Если хотите видеть подробности работы приложения опустите ключ.
@@ -147,8 +148,8 @@ server {
 
 * ```sudo certbot --nginx```
 
-* проверить возможность автоматического обнавления ```sudo certbot renew --dry-run```
+* проверить возможность автоматического обнавления: ```sudo certbot renew --dry-run```
 
 > Больше подробностей, в официальной инструкции: [certbot.eff.org](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx)
 
-Если всё сделанно верно, сайт будет доступен по защищённому протоколу https на двух зеркалах your_domain.ru и www.your_domain.ru. Если такое поведение нежелательно необходимо настроить редирект самостоятельно.
+Если всё сделанно верно, сайт будет доступен по защищённому протоколу https на двух зеркалах **your_domain.ru** и **www.your_domain.ru**. Если такое поведение нежелательно необходимо настроить редирект самостоятельно.
