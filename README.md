@@ -26,7 +26,7 @@
 * ```sudo apt install postgresql-12```
 
 ## Установка Docker и Compose
-Для установки Docker выполнить следующие команды:
+**Для установки Docker выполнить следующие команды:**
 ```
 sudo apt-get install \
     apt-transport-https \
@@ -52,7 +52,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 * проверить установку Docker: ```docker --version```
 * За подробностями обращайтесь к официальной документации: [Install Docker using the repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 
-Для установки Compose выполнить следующие команды:
+**Для установки Compose выполнить следующие команды:**
 ```
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
