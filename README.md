@@ -174,15 +174,18 @@ server {
 
 ## Получение SSL сертификата от Let's Encrypt и настройка автоматического обновления ##
 Получение и обновление сертификата будет происходить в автоматическом режиме с помощью ACME-клиента certbot, для этого выполните следующие команды:
-
-* ```sudo snap install core; sudo snap refresh core```
-
-* ```sudo snap install --classic certbot```
-
-* ```sudo ln -s /snap/bin/certbot /usr/bin/certbot```
-
-* ```sudo certbot --nginx```
-
+```
+sudo snap install core; sudo snap refresh core
+```
+```
+sudo snap install --classic certbot
+```
+```
+sudo ln -s /snap/bin/certbot /usr/bin/certbot
+```
+```
+sudo certbot --nginx
+```
 * проверить возможность автоматического обнавления сертификата: ```sudo certbot renew --dry-run```
 
 > Больше подробностей, в официальной инструкции: [certbot.eff.org](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx)
