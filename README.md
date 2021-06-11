@@ -26,6 +26,16 @@
 * ```sudo apt install postgresql-12```
 
 ## Установка Docker и Compose займёт немного больше времени
+Для установки Docker выполнить следующие команды:
+```
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
 * Для установки Docker выполнить шаги из официальной документации: [Install Docker using the repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 * Для установки Compose выполнить шаги из официальной документации: [Install Compose](https://docs.docker.com/compose/install/#install-compose)
 
