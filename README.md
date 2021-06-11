@@ -27,7 +27,7 @@
 
 ## Установка Docker и Compose займёт немного больше времени
 Для установки Docker выполнить следующие команды:
-```
+* ```
 sudo apt-get install \
     apt-transport-https \
     ca-certificates \
