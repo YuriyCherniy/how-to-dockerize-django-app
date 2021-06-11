@@ -4,12 +4,15 @@
 > Данное руководство не является ультимативным гайдом по деплою Django приложений. Это всего лишь небольшая памятка для автора этих строк, которая может быть полезна ещё кому-то. Какие-то решения могут быть неэффективными, какие-то небезопасными. Но к концу этих строк мы получим настроенный VDS/VPS сервер с работающим сайтом, взрослой базой данных и SSL сертификатом. Критика и помощь в совершенствовании приветствуется. Pull request в помощь.
 
 ## После установки системы на VDS/VPS сервере выполнить следующие команды ##
+
 ```
 sudo apt update
 ```
+
 ```
 sudo apt upgrade
 ```
+
 > Первая команда обновит список доступных пакетов. Вторая обновит пакеты в системе. 
 
 ## Настройка подключения к серверу по ssh ключу ##
@@ -26,15 +29,18 @@ sudo apt upgrade
 > Терминал должен отобразить папки и файла содержащиеся в /root.
 
 ## Установка Nginx и Postgresql
+
 ```
 sudo apt install nginx
 ```
+
 ```
 sudo apt install postgresql-12
 ```
 
 ## Установка Docker и Compose
 **Для установки Docker выполнить следующие команды:**
+
 ```
 sudo apt-get install \
     apt-transport-https \
@@ -43,30 +49,38 @@ sudo apt-get install \
     gnupg \
     lsb-release
 ```
+
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 ```
+
 ```
 echo \
   "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 ```
+
 ```
 sudo apt-get update
 ```
+
 ```
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
+
 * проверить установку Docker: ```docker --version```
 * За подробностями обращайтесь к официальной документации: [Install Docker using the repository](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository)
 
 **Для установки Compose выполнить следующие команды:**
+
 ```
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
+
 ```
 sudo chmod +x /usr/local/bin/docker-compose
 ```
+
 * проверить установку Compose: ```docker-compose --version```
 * За подробностями обращайтесь к официальной документации: [Install Compose](https://docs.docker.com/compose/install/#install-compose)
 
@@ -95,6 +109,7 @@ COPY . .
 RUN ["chmod", "+x", "docker-entrypoint.sh"]
 ENTRYPOINT [ "./docker-entrypoint.sh" ]
 ```
+
 Образ будет создан на основе официального образа python:3.9.5-slim, туда будет скопирован файл [requirements.txt](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/requirements.txt), затем установятся все зависимости. Далее будут скопированны файлы нашего приложения и выполнены инструкции из файла [docker-entrypoint.sh](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/docker-entrypoint.sh). Вот его содержимое:
 
 ```
@@ -195,12 +210,15 @@ server {
 ```
 sudo snap install core; sudo snap refresh core
 ```
+
 ```
 sudo snap install --classic certbot
 ```
+
 ```
 sudo ln -s /snap/bin/certbot /usr/bin/certbot
 ```
+
 ```
 sudo certbot --nginx
 ```
