@@ -84,6 +84,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 ## Создание и запуск Docker контейнера ##
 Файл [Dockerfile](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/Dockerfile) содержит инструкции по созданию Docker образа на основе которого будет создаваться и запускаться контейнер с Django приложением. Вот так выглядит наш:
+
 ```
 FROM python:3.9.5-slim
 ENV PYTHONUNBUFFERED=1
@@ -95,6 +96,7 @@ RUN ["chmod", "+x", "docker-entrypoint.sh"]
 ENTRYPOINT [ "./docker-entrypoint.sh" ]
 ```
 Образ будет создан на основе официального образа python:3.9.5-slim, туда будет скопирован файл [requirements.txt](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/requirements.txt), затем установятся все зависимости. Далее будут скопированны файлы нашего приложения и выполнены инструкции из файла [docker-entrypoint.sh](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/docker-entrypoint.sh). Вот его содержимое:
+
 ```
 #!/bin/bash
 
@@ -110,8 +112,10 @@ python3 manage.py migrate
 echo "Starting server"
 gunicorn app_to_dockerize.wsgi:application --bind 0.0.0.0:8000 --workers 3
 ```
+
 Последняя строка запустит сервер приложений gunicorn для обслуживания нашего Django проекта.
 Упаравлять Docker будем с помощью docker-compose. Compose обычно используется для работы с многоконтейнерными проектами, но и в данном случае docker-compose немного облегчает работу, а при развитии проекта может оказаться необходимым. Например, Compose предоставляет очень удобный интерфейс для работы с именованными томами, а они однозначно понадобятся если приложение будет немного сложнее, чем пример из этого руководства. Инструкции для docker-compose описываются в файле [docker-compose.yml](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/docker-compose.yml). Вот содержимое нашего:
+
 ```
 version: "3.9"
    
@@ -123,6 +127,7 @@ services:
     network_mode: "host"
     restart: unless-stopped
 ```
+
 Compose смотрит в Dockerfile, строит на его основе образ, а также определяет папку на хосте, куда будут собраны статические файлы. **network_mode: "host"** говорит о том, что сеть Docker контейнера будет открыта локальному хосту, без этого Nginx не увидит сеть кконтейнера. **restart: unless-stopped** говорит о том, что при перезагрузке сервера Docker контейнер будет стартовать автоматически, пока не будет остановлен намеренно.
 
 ## Всё готово, можно запускать создание и старт контейнера ##
@@ -140,6 +145,7 @@ Compose смотрит в Dockerfile, строит на его основе об
 ## Настройка Nginx в качестве прокси сервере ##
 * открыть файл: ```sudo nano /etc/nginx/nginx.conf```
 * поместить следующее содержимое:
+
 ```
 events {}
 
@@ -147,8 +153,10 @@ http {
   include conf.d/app_to_dockerize;
 }
 ```
+
 * открыть файл: ```sudo nano /etc/nginx/conf.d/app_to_dockerize```
 * поместить следующее содержимое:
+
 ```
 include /etc/nginx/mime.types;
 
@@ -174,6 +182,7 @@ server {
 }
 
 ```
+
 > ```<your_domain.ru>``` и ```<www.your_domain.ru>``` замените на ваши доменные имена.
 > ```<username>``` замените на имя пользователя операционной системы.
 * проверить конфигурационные файлы Nginx на синтаксические ошибки: ```sudo nginx -t```
@@ -182,6 +191,7 @@ server {
 
 ## Получение SSL сертификата от Let's Encrypt и настройка автоматического обновления ##
 Получение и обновление сертификата будет происходить в автоматическом режиме с помощью ACME-клиента certbot, для этого выполните следующие команды:
+
 ```
 sudo snap install core; sudo snap refresh core
 ```
@@ -194,6 +204,7 @@ sudo ln -s /snap/bin/certbot /usr/bin/certbot
 ```
 sudo certbot --nginx
 ```
+
 * проверить возможность автоматического обнавления сертификата: ```sudo certbot renew --dry-run```
 
 > Больше подробностей, в официальной инструкции: [certbot.eff.org](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx)
