@@ -152,7 +152,10 @@ Compose смотрит в Dockerfile, строит на его основе об
 
 ## Всё готово, можно запускать создание и старт контейнера ##
 * перейти в домашнюю директорию: ```cd ~```
-* скачать Django приложение на сервер: ```git clone https://github.com/YuriyCherniy/how-to-dockerize-django-app.git```
+* скачать Django приложение на сервер:
+```
+git clone https://github.com/YuriyCherniy/how-to-dockerize-django-app.git
+```
 * перейти в папку содержащую docker-compose.yml файл: ```cd how-to-dockerize-django-app/app_to_dockerize/```
 * запустить создание и запуск контейнера: ```sudo docker-compose up -d```
 > Ключь ```-d``` говорит о том, что контейнер будет запущен в **detached mode**. Это значит, что после создания образа и запуска контейнера, консоль будет освобождена. Если хотите видеть подробности работы приложения опустите ключ.
