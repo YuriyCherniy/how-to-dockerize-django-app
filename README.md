@@ -107,7 +107,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 > В контексте данного руководства замените ```<db_name>``` на ```test_db```, ```<username>``` на ```user_postgres```, ```<password>``` на ```0000```. В случае использования собственных значений не забудьте внести изменения в переменную [DATABASES](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/40c67213367c43cb7d786fefcf8f557d797bc67b/app_to_dockerize/app_to_dockerize/settings.py#L78-L87). **Внимание! Не храните чувствительные данные в файлах приложения, используйте для этого переменные окружения. В данном руководстве пароли и имена пользователей хранятся в файлах приложения для просты восприятия.**
 
 <details>
-<summary>test</summary>
+<summary>Шаги под спойлером можно пропостуть. Рекомендуется выполнить на боевой базе данных</summary>
 
 #### Выполнить рекомендации по оптимизации Postgresql из [официальной докуметации Django](https://docs.djangoproject.com/en/3.2/ref/databases/#postgresql-notes): ####
 ```
