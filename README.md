@@ -23,7 +23,7 @@ sudo apt update
 sudo apt upgrade
 ```
 
-## Установка Nginx и Postgresql
+## Установка Nginx
 
 ```
 sudo apt install nginx
