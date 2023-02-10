@@ -28,7 +28,7 @@ sudo apt upgrade
 ```
 sudo apt install nginx
 ```
-установка для Ubuntu 20.04
+**Установка для Ubuntu 20.04**
 >```
 >sudo apt install postgresql-12
 >```
