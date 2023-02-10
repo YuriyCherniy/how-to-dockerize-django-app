@@ -255,4 +255,4 @@ sudo certbot --nginx
 
 > Больше подробностей, в официальной инструкции: [certbot.eff.org](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx)
 
-Если всё сделанно верно, сайт будет доступен по защищённому протоколу https: **https://your_domain.ru**.
+Если всё сделанно верно, сайт будет доступен по защищённому протоколу https: **https://your_domain.ru**
