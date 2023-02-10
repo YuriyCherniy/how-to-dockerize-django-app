@@ -29,9 +29,9 @@ sudo apt upgrade
 sudo apt install nginx
 ```
 
-```
-sudo apt install postgresql-12
-```
+>```
+>sudo apt install postgresql-12
+>```
 
 ## Установка Docker и Compose
 **Для установки Docker выполнить следующие команды:**
