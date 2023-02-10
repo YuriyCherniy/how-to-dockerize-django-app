@@ -35,7 +35,7 @@ sudo apt install nginx
 >sudo apt install postgresql-12
 >```
 
-- **Установка Postgresql длч Ubuntu 22.04**
+- **Установка Postgresql для Ubuntu 22.04**
 
 >```
 >sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
