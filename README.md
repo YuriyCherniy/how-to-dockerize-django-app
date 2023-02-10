@@ -28,9 +28,10 @@ sudo apt upgrade
 ```
 sudo apt install nginx
 ```
-
+```diff
 - test
-
+ ```
+ 
 >```
 >sudo apt install postgresql-12
 >```
