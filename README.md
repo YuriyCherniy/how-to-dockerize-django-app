@@ -210,7 +210,7 @@ upstream web_app {
 
 server {
     listen 80;
-    server_name <your_domain.ru> <www.your_domain.ru>;
+    server_name <your_domain.ru>;
     location / {
         proxy_pass http://web_app;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -255,4 +255,4 @@ sudo certbot --nginx
 
 > Больше подробностей, в официальной инструкции: [certbot.eff.org](https://certbot.eff.org/lets-encrypt/ubuntufocal-nginx)
 
-Если всё сделанно верно, сайт будет доступен по защищённому протоколу https на двух зеркалах **your_domain.ru** и **www.your_domain.ru**. Если такое поведение нежелательно необходимо настроить редирект самостоятельно.
+Если всё сделанно верно, сайт будет доступен по защищённому протоколу https: **https://your_domain.ru**.
