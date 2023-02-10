@@ -125,6 +125,7 @@ ALTER ROLE <username> SET timezone TO 'UTC';
 * покинуть консоль psql: ```ctr+Z```
 
 ## Создание и запуск Docker контейнера ##
+Файлы Dockerfile, docker-entrypoint.sh и docker-compose.yml уже созданы и лежат в репозитории, просто ознакомтесь зачем они нужны и как работают.
 Файл [Dockerfile](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/main/app_to_dockerize/Dockerfile) содержит инструкции по созданию Docker образа на основе которого будет создаваться и запускаться контейнер с Django приложением. Вот так выглядит наш:
 
 ```
