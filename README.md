@@ -28,7 +28,7 @@ sudo apt upgrade
 ```
 sudo apt install nginx
 ```
-# Внимание! Установка Postgresql на Ubuntu 20.04 и 22.04 имеет различия
+### Внимание! Установка Postgresql на Ubuntu 20.04 и 22.04 имеет различия
 >**Установка для Postgresql Ubuntu 20.04**
 >>```
 >>sudo apt install postgresql-12
