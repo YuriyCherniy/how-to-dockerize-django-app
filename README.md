@@ -108,6 +108,7 @@ sudo chmod +x /usr/local/bin/docker-compose
 
 <details>
 <summary>test</summary>
+
 #### Выполнить рекомендации по оптимизации Postgresql из [официальной докуметации Django](https://docs.djangoproject.com/en/3.2/ref/databases/#postgresql-notes): ####
 ```
 ALTER ROLE <username> SET client_encoding TO 'utf8';
