@@ -105,6 +105,9 @@ sudo chmod +x /usr/local/bin/docker-compose
 * создать пользователя: ```CREATE USER <username> WITH PASSWORD '<password>';```
 * предоставить пользователю административный доступ к базе данных: ```GRANT ALL PRIVILEGES ON DATABASE <db_name> TO <username>;```
 > В контексте данного руководства замените ```<db_name>``` на ```test_db```, ```<username>``` на ```user_postgres```, ```<password>``` на ```0000```. В случае использования собственных значений не забудьте внести изменения в переменную [DATABASES](https://github.com/YuriyCherniy/how-to-dockerize-django-app/blob/40c67213367c43cb7d786fefcf8f557d797bc67b/app_to_dockerize/app_to_dockerize/settings.py#L78-L87). **Внимание! Не храните чувствительные данные в файлах приложения, используйте для этого переменные окружения. В данном руководстве пароли и имена пользователей хранятся в файлах приложения для просты восприятия.**
+
+<details>
+<summary>test</summary>
 #### Выполнить рекомендации по оптимизации Postgresql из [официальной докуметации Django](https://docs.djangoproject.com/en/3.2/ref/databases/#postgresql-notes): ####
 ```
 ALTER ROLE <username> SET client_encoding TO 'utf8';
@@ -115,6 +118,8 @@ ALTER ROLE <username> SET default_transaction_isolation TO 'read committed';
 ```
 ALTER ROLE <username> SET timezone TO 'UTC';
 ```
+</details>
+
 * покинуть консоль psql: ```ctr+Z```
 
 ## Создание и запуск Docker контейнера ##
