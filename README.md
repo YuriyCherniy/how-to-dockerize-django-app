@@ -194,6 +194,7 @@ Compose смотрит в Dockerfile, строит на его основе об
 
 ```
 user www-data;
+
 events {}
 
 http {
